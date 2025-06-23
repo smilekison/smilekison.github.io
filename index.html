@@ -2,145 +2,252 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AeroByte AI – Urban Farming Reinvented</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AeroByte AI – AI-Powered Urban Farming</title>
   <style>
-    /* Basic Reset */
+    :root {
+      --green: #3b7d4f;
+      --light-green: #eafbea;
+      --accent: #88c057;
+      --dark: #1e2e24;
+      --text: #2f2f2f;
+      --white: #ffffff;
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-    /* Navigation */
-    header.nav {
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: var(--white);
       display: flex; justify-content: space-between; align-items: center;
-      background: #f8f9fa; padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      z-index: 1000;
     }
-    .logo { font-weight: bold; font-size: 1.2rem; color: #0070f3; }
-    .nav-links a {
-      margin: 0 0.8rem; text-decoration: none; color: #333; font-weight: 500;
-    }
-    .nav-links a:hover { color: #0070f3; }
 
-    /* Hero */
+    .logo {
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: var(--green);
+    }
+
+    nav a {
+      margin: 0 0.9rem;
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--green);
+      border-bottom: 2px solid var(--accent);
+    }
+
     .hero {
-      background: linear-gradient(to right, #e0f7fa, #f1f8e9);
-      padding: 4rem 2rem; text-align: center;
-    }
-    .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-    .hero p { font-size: 1.2rem; margin-bottom: 1.5rem; }
-    .btn, .btn-outline {
-      display: inline-block; margin: 0.5rem; padding: 0.7rem 1.5rem;
-      text-decoration: none; font-weight: bold; border-radius: 5px;
-    }
-    .btn { background: #0070f3; color: white; }
-    .btn-outline {
-      border: 2px solid #0070f3; color: #0070f3; background: white;
+      height: 100vh;
+      background: linear-gradient(120deg, #dff0d8, #f5fff5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
     }
 
-    /* Sections */
-    section.section {
-      padding: 3rem 2rem; background: #f9f9f9; border-bottom: 1px solid #eee;
+    .hero h1 {
+      font-size: 3rem;
+      color: var(--green);
+      animation: fadeIn 1.5s ease-in-out;
     }
-    section.section:nth-child(even) { background: #ffffff; }
-    section h2 { font-size: 1.8rem; margin-bottom: 1rem; color: #0070f3; }
 
-    /* Footer */
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin-top: 1rem;
+      color: #444;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .cta-btn {
+      margin-top: 2rem;
+      padding: 0.8rem 1.6rem;
+      background: var(--green);
+      color: var(--white);
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background: var(--accent);
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      color: var(--green);
+      margin-bottom: 1rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--light-green);
+      border-left: 6px solid var(--accent);
+      padding: 1.5rem;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .counter {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    .faq {
+      margin-top: 2rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
+    }
+
+    .faq-question {
+      background: var(--light-green);
+      padding: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      border-left: 5px solid var(--green);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0.8rem 1rem;
+      background: #f9f9f9;
+      border-left: 5px solid var(--accent);
+    }
+
     footer {
-      text-align: center; padding: 1.5rem; background: #f1f1f1;
-      font-size: 0.9rem; color: #666;
+      text-align: center;
+      padding: 3rem 1rem;
+      background: #ecf9f1;
+      font-size: 0.95rem;
+      color: #444;
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .nav-links { display: flex; flex-wrap: wrap; justify-content: center; }
-      .hero h1 { font-size: 2rem; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <header class="nav">
-    <div class="logo">AeroByte AI</div>
-    <nav class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#product">Product</a>
-      <a href="#technology">Technology</a>
-      <a href="#solutions">Solutions</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#pilot">Pilot</a>
-      <a href="#about">About</a>
-      <a href="#resources">Resources</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+<header>
+  <div class="logo">AeroByte AI</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#benefits">Benefits</a>
+    <a href="#tech">Tech</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <h1>The Future of Urban Farming Starts Here</h1>
-    <p>Cultivating the Future. Freshness, Perfected.</p>
-    <a class="btn" href="#pilot">Join the Pilot</a>
-    <a class="btn-outline" href="#contact">Book Consultation</a>
-  </section>
+<section class="hero" id="home">
+  <h1>Urban Farming Reinvented</h1>
+  <p>Grow high-value crops anywhere, year-round. Powered by AI, designed for cities, and built for sustainability.</p>
+  <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get In Touch</button>
+</section>
 
-  <!-- Content Sections -->
-  <section id="product" class="section">
-    <h2>The Genesis Tower</h2>
-    <p>Our sleek, modular aeroponic tower is designed for high-value urban farming. Premium aesthetics meets IoT precision – perfect for chefs, wellness leaders, and sustainable cities.</p>
-  </section>
+<section id="benefits">
+  <h2>Smart Growing. Real Results.</h2>
+  <div class="card-grid">
+    <div class="card"><strong>💧 95% Less Water</strong><br/>Aeroponic precision drastically reduces resource use.</div>
+    <div class="card"><strong>📊 AI Optimization</strong><br/>Dynamic data-driven growth recipes for maximum yield.</div>
+    <div class="card"><strong>🏙️ Space-Smart Design</strong><br/>Modular, vertical and beautiful. Built for the modern city.</div>
+    <div class="card"><strong>🌿 Medicinal Focus</strong><br/>Specialized support for herbs, microgreens, and rare crops.</div>
+  </div>
+</section>
 
-  <section id="technology" class="section">
-    <h2>Powered by Intelligence</h2>
-    <p>IoT sensors and AI algorithms deliver live data, predictive insights, and automated growth recipes. No guesswork – just perfect produce every time.</p>
-  </section>
+<section id="tech">
+  <h2>Technology That Thinks</h2>
+  <p>Our Genesis Tower is embedded with real-time sensors and a proprietary AI that learns and adapts. From first sprout to harvest, everything is optimized for taste, nutrition, and efficiency.</p>
+  <p><strong>Live Sites:</strong> <span class="counter" id="liveCounter">0</span> UK pilots running.</p>
+</section>
 
-  <section id="solutions" class="section">
-    <h2>Who We Serve</h2>
-    <ul>
-      <li>🧘 Wellness Retreats – grow medicinal herbs onsite</li>
-      <li>🍽️ Premium Restaurants – hyperlocal, ultra-fresh greens</li>
-      <li>🏙️ Urban Farms – smart community food systems</li>
-    </ul>
-  </section>
+<section id="faq">
+  <h2>FAQ</h2>
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-question">Is it difficult to use?</div>
+      <div class="faq-answer">Not at all! The AI dashboard makes growing effortless, even for beginners.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Where can I install it?</div>
+      <div class="faq-answer">Anywhere — kitchens, rooftops, wellness centers, restaurants, schools.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">What support do I get?</div>
+      <div class="faq-answer">All clients receive concierge setup and remote AI-powered guidance.</div>
+    </div>
+  </div>
+</section>
 
-  <section id="pricing" class="section">
-    <h2>Pricing</h2>
-    <p>🎯 Hardware: £1,250 – £1,850 per Genesis Tower<br />
-    💡 Software: From £95/month (AI dashboard & support)</p>
-  </section>
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p>Email: <a href="mailto:hello@aerobyte.ai">hello@aerobyte.ai</a></p>
+  <p>LinkedIn: <a href="#">AeroByte AI</a> | Twitter: <a href="#">@AeroByteAI</a></p>
+</section>
 
-  <section id="pilot" class="section">
-    <h2>Pilot Program</h2>
-    <p>We’re launching exclusive pilots with selected UK businesses. Includes concierge setup, support, and access to our AI platform. Become a founding partner today.</p>
-  </section>
+<footer>
+  &copy; 2025 AeroByte AI – Greener Cities. Smarter Crops.
+</footer>
 
-  <section id="about" class="section">
-    <h2>About AeroByte AI</h2>
-    <p>We exist to reinvent local food with intelligence. Our mission: empower UK cities with scalable, smart growing systems to boost food security, sustainability, and health.</p>
-  </section>
+<script>
+  // Counter animation
+  let count = 0, target = 27;
+  const counterEl = document.getElementById("liveCounter");
+  const step = () => {
+    if (count < target) {
+      count++;
+      counterEl.textContent = count;
+      setTimeout(step, 80);
+    }
+  };
+  window.addEventListener("load", step);
 
-  <section id="resources" class="section">
-    <h2>Resources</h2>
-    <p>Download our whitepapers, read thought leadership blogs, and explore research on AI-powered agriculture in the UK urban context.</p>
-  </section>
+  // FAQ toggle
+  document.querySelectorAll(".faq-question").forEach(q => {
+    q.addEventListener("click", () => {
+      const answer = q.nextElementSibling;
+      answer.style.display = answer.style.display === "block" ? "none" : "block";
+    });
+  });
+</script>
 
-  <section id="contact" class="section">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:hello@aerobyte.ai">hello@aerobyte.ai</a><br />
-    LinkedIn: <a href="https://linkedin.com">AeroByte AI</a><br />
-    Twitter: <a href="https://twitter.com">Follow Us</a></p>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 AeroByte AI. All rights reserved. | Built for UK Innovator Founder Visa
-  </footer>
-
-  <!-- JavaScript -->
-  <script>
-    // Optional: Scroll behavior or future interactivity
-    console.log("AeroByte AI SPA loaded.");
-  </script>
 </body>
 </html>
