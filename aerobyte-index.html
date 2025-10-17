@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AeroByte AI – AI-Powered Urban Farming</title>
+  <style>
+    :root {
+      --green: #3b7d4f;
+      --light-green: #eafbea;
+      --accent: #88c057;
+      --dark: #1e2e24;
+      --text: #2f2f2f;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: var(--white);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: var(--green);
+    }
+
+    nav a {
+      margin: 0 0.9rem;
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--green);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .hero {
+      height: 100vh;
+      background: linear-gradient(120deg, #dff0d8, #f5fff5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: var(--green);
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin-top: 1rem;
+      color: #444;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .cta-btn {
+      margin-top: 2rem;
+      padding: 0.8rem 1.6rem;
+      background: var(--green);
+      color: var(--white);
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background: var(--accent);
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      color: var(--green);
+      margin-bottom: 1rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--light-green);
+      border-left: 6px solid var(--accent);
+      padding: 1.5rem;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .counter {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    .faq {
+      margin-top: 2rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
+    }
+
+    .faq-question {
+      background: var(--light-green);
+      padding: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      border-left: 5px solid var(--green);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0.8rem 1rem;
+      background: #f9f9f9;
+      border-left: 5px solid var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: #ecf9f1;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">AeroByte AI</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#benefits">Benefits</a>
+    <a href="#tech">Tech</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <h1>Urban Farming Reinvented</h1>
+  <p>Grow high-value crops anywhere, year-round. Powered by AI, designed for cities, and built for sustainability.</p>
+  <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get In Touch</button>
+</section>
+
+<section id="benefits">
+  <h2>Smart Growing. Real Results.</h2>
+  <div class="card-grid">
+    <div class="card"><strong>💧 95% Less Water</strong><br/>Aeroponic precision drastically reduces resource use.</div>
+    <div class="card"><strong>📊 AI Optimization</strong><br/>Dynamic data-driven growth recipes for maximum yield.</div>
+    <div class="card"><strong>🏙️ Space-Smart Design</strong><br/>Modular, vertical and beautiful. Built for the modern city.</div>
+    <div class="card"><strong>🌿 Medicinal Focus</strong><br/>Specialized support for herbs, microgreens, and rare crops.</div>
+  </div>
+</section>
+
+<section id="tech">
+  <h2>Technology That Thinks</h2>
+  <p>Our Genesis Tower is embedded with real-time sensors and a proprietary AI that learns and adapts. From first sprout to harvest, everything is optimized for taste, nutrition, and efficiency.</p>
+  <p><strong>Live Sites:</strong> <span class="counter" id="liveCounter">0</span> UK pilots running.</p>
+</section>
+
+<section id="faq">
+  <h2>FAQ</h2>
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-question">Is it difficult to use?</div>
+      <div class="faq-answer">Not at all! The AI dashboard makes growing effortless, even for beginners.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Where can I install it?</div>
+      <div class="faq-answer">Anywhere — kitchens, rooftops, wellness centers, restaurants, schools.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">What support do I get?</div>
+      <div class="faq-answer">All clients receive concierge setup and remote AI-powered guidance.</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p>Email: <a href="mailto:hello@aerobyte.ai">hello@aerobyte.ai</a></p>
+  <p>LinkedIn: <a href="#">AeroByte AI</a> | Twitter: <a href="#">@AeroByteAI</a></p>
+</section>
+
+<footer>
+  &copy; 2025 AeroByte AI – Greener Cities. Smarter Crops.
+</footer>
+
+<script>
+  // Counter animation
+  let count = 0, target = 27;
+  const counterEl = document.getElementById("liveCounter");
+  const step = () => {
+    if (count < target) {
+      count++;
+      counterEl.textContent = count;
+      setTimeout(step, 80);
+    }
+  };
+  window.addEventListener("load", step);
+
+  // FAQ toggle
+  document.querySelectorAll(".faq-question").forEach(q => {
+    q.addEventListener("click", () => {
+      const answer = q.nextElementSibling;
+      answer.style.display = answer.style.display === "block" ? "none" : "block";
+    });
+  });
+</script>
+
+</body>
+</html>
