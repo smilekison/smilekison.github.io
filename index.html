@@ -431,6 +431,7 @@
         }
 
         .nav-mobile .nav-links {
+            display: flex;
             flex-direction: column;
             gap: 0;
             margin-top: 2rem;
@@ -2646,15 +2647,17 @@
             
             <!-- Desktop Navigation -->
             <ul class="nav-links" id="nav-links">
-                <li><a href="#summary" class="nav-link active">Home</a></li>
-                <li><a href="#skills" class="nav-link">About</a></li>
-                <li><a href="#experience" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Experience</a></li>
-                <li><a href="#certifications" class="nav-link">Projects</a></li>
-                <li><a href="#education" class="nav-link">Certifications</a></li>
-                <li><a href="#contact" class="nav-link">Education</a></li>
-                <li><a href="#summary" class="nav-link">Contact</a></li>
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#summary" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>   <!-- <-- fix -->
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
+
+
             
             <!-- Mobile Hamburger Menu -->
             <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
@@ -2680,18 +2683,8 @@
             <li><a href="#projects" class="nav-link">🚀 Projects</a></li>
             <li><a href="#certifications" class="nav-link">🏆 Certifications</a></li>
             <li><a href="#education" class="nav-link">🎓 Education</a></li>
-            <li><a href="#summary" class="nav-link">Contact</a></li>
-            
+            <li><a href="#contact" class="nav-link">📬 Contact</a></li>
         </ul>
-        
-        <div class="nav-mobile-contact">
-            <h4>Get In Touch</h4>
-            <a href="mailto:smilekisan.dev@gmail.com?subject=DevOps Opportunity - Let's Connect&body=Hi Smile,%0D%0A%0D%0AI'm interested in discussing a DevOps opportunity with you.%0D%0A%0D%0ABest regards,">smilekisan.dev@gmail.com</a><br>
-            <a href="tel:+447464242039">+44 7464 242039</a>
-            <a href="https://www.linkedin.com/in/smile-kisan/">Linkedin: Smile Kisan</a>
-
-            
-        </div>
     </div>
 
     <div class="container">
@@ -3311,7 +3304,8 @@
                 navToggle.classList.add('active');
                 navMobile.classList.add('active');
                 navOverlay.classList.add('active');
-                body.style.overflow = 'hidden'; // Prevent background scrolling
+                navMobile.scrollTop = 0;          // ← reset drawer scroll
+                body.style.overflow = 'hidden';
             }
 
             function closeMobileMenu() {
@@ -3322,7 +3316,11 @@
             }
 
             // Event listeners for mobile menu
-            navToggle.addEventListener('click', toggleMobileMenu);
+            navToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMobileMenu();
+            });
             navOverlay.addEventListener('click', closeMobileMenu);
 
             // Close mobile menu when clicking on nav links
@@ -3381,14 +3379,14 @@
             // Smooth scroll functionality
             function smoothScrollTo(targetId) {
                 const targetSection = document.getElementById(targetId);
-                
-                if (targetSection) {
-                    const offsetTop = targetSection.offsetTop - 120; // Account for fixed navbar
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
+                const navbar = document.getElementById('navbar');
+                if (!targetSection) return;
+
+                const navHeight = navbar ? navbar.getBoundingClientRect().height : 0;
+                const extra = 24; // breathing room so "Key Projects" title isn't hidden
+                const offsetTop = targetSection.getBoundingClientRect().top + window.pageYOffset - navHeight - extra;
+
+                window.scrollTo({ top: Math.max(offsetTop, 0), behavior: 'smooth' });
             }
 
             // Add scroll event listener with throttling for better performance
@@ -3410,8 +3408,14 @@
                     navLinks.forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
                     
-                    // Smooth scroll to target
-                    smoothScrollTo(targetId);
+                
+                    // On mobile: close drawer first, then scroll
+                    if (window.innerWidth <= 767 && navMobile.classList.contains('active')) {
+                        closeMobileMenu();
+                        setTimeout(() => smoothScrollTo(targetId), 250); // let the slide-out finish
+                    } else {
+                        smoothScrollTo(targetId);
+                    }
                 });
             });
 
